@@ -6,11 +6,18 @@ body {
 	/*background-color: #382934;*/
 	background-color: white;
 }
+#triangle {
+	fill: rgba(0, 0, 0, 0.1);
 
+}
 .link {
 	stroke-width: 0.6px;
 	stroke: rgba(0, 0, 0, 0.1);
 	/*stroke: rgba(255, 255, 255, 0.1);*/
+	marker-end: url(#triangle);
+}
+.link:hover {
+	stroke: rgba(0, 0, 0, 0.4);
 }
 
 .node {
@@ -18,9 +25,9 @@ body {
 	stroke: rgba(0, 0, 0, 0.3);
 	stroke-width: 0.6px;
 	fill: rgba(0, 255, 156) ;
-	fill: rgba(0, 255, 156, 0.8) ;
+	/*fill: rgba(0, 255, 156, 0.8) ;*/
 	transition: stroke 0.2s, stroke-width 0.2s;
-	fill-opacity: 0.8;
+	/*fill-opacity: 0.8;*/
 }
 
 .node text {

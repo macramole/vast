@@ -1,12 +1,17 @@
 body {
     margin: 0;
-    font-family: "Arial";
+}
+
+#mynetwork {
+  width: 100%;
+  height: 800px;
+  border: 1px solid lightgray;
 }
 
 #UI {
     /*float : left;*/
     position: absolute;
-    z-index: 1000;
+    z-index: 100;
 }
 
 #UI #ulGates {
@@ -30,41 +35,4 @@ body {
     width: 50%;
     margin: 1em auto 0 auto;
     display: block;
-}
-
-#chart {
-    float : right;
-}
-
-.node rect {
-  cursor: move;
-  fill-opacity: .9;
-  shape-rendering: crispEdges;
-}
-
-.node text {
-  pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
-}
-
-.link {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .2;
-}
-
-
-.cycleLink {
-  fill: #600;
-  opacity: .2;
-  stroke: none;
-  stroke-linejoin: "round";
-}
-
-.cycleLink:hover {
-  opacity: .5;
-}
-
-.link:hover {
-  stroke-opacity: .5;
 }

@@ -10,6 +10,30 @@ var nodes;
 var maxLinkValue = 0;
 var scaleLineWidth;
 
+function addTriangle(svg) {
+    svg
+        .append("marker")
+            .attr("id", "triangle")
+            .attr("viewBox", "0 0 10 10")
+            .attr("refX", 0)
+            .attr("refY", 5)
+            .attr("markerUnits", "strokeWidth")
+            .attr("markerWidth", 4)
+            .attr("markerHeight", 3)
+            .attr("orient", "auto")
+        .append("path")
+            .attr("d", "M 0 0 L 10 5 L 0 10 z")
+    ;
+    //
+    // <marker id="triangle"
+    //   viewBox= refX="0" refY="5"
+    //   markerUnits="strokeWidth"
+    //   markerWidth="4" markerHeight="3"
+    //   orient="auto">
+    //   <path d="M 0 0 L 10 5 L 0 10 z" />
+    // </marker>
+}
+
 function init() {
     d3.select("body svg").remove();
 
@@ -18,10 +42,12 @@ function init() {
         .attr("height", height)
     ;
 
+    addTriangle(svg);
+
+    // d3.forceCenter([width/2, height/2]);
+
     force = d3.layout.force()
-        //.gravity(.05)
         .distance(200)
-        //.linkDistance(200)
         .charge(1000)
         .size([width, height])
         .nodes(data.nodes)
@@ -51,7 +77,10 @@ function init() {
             // }
             // return 1;
         })
-        .attr("stroke-linecap", "round");
+        .attr("data-source", function(d) { return d.source.name })
+        .attr("data-target", function(d) { return d.target.name })
+        .attr("stroke-linecap", "round")
+    ;
 
     var nodeDrag = force.drag().on("dragstart", function(d) {
         d.fixed = true;

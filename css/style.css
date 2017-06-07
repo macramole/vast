@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    font-family: "Arial";
+}
+
+#UI {
+    /*float : left;*/
+    position: absolute;
+}
+
+#UI #ulGates {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+    height: 40%;
+    overflow-y: scroll;
+}
+
+#UI #ulGates li {
+    padding: 0.6em 1em;
+    cursor: pointer;
+    border-bottom: 1px solid #5f5f5f;
+}
+#UI #ulGates li.selected {
+    background-color: #6be76b;
+}
+#UI #btnFilter {
+    width: 50%;
+    margin: 1em auto 0 auto;
+    display: block;
+}
+
+#chart {
+    float : right;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+
+.cycleLink {
+  fill: #600;
+  opacity: .2;
+  stroke: none;
+  stroke-linejoin: "round";
+}
+
+.cycleLink:hover {
+  opacity: .5;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}

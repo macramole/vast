@@ -1,0 +1,38 @@
+body {
+	font-family: Arial, sans-serif;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	/*background-color: #382934;*/
+	background-color: white;
+}
+
+.link {
+	stroke-width: 0.6px;
+	stroke: rgba(0, 0, 0, 0.1);
+	/*stroke: rgba(255, 255, 255, 0.1);*/
+}
+
+.node {
+	cursor: pointer;
+	stroke: rgba(0, 0, 0, 0.3);
+	stroke-width: 0.6px;
+	fill: rgba(0, 255, 156) ;
+	fill: rgba(0, 255, 156, 0.8) ;
+	transition: stroke 0.2s, stroke-width 0.2s;
+	fill-opacity: 0.8;
+}
+
+.node text {
+	stroke : none;
+	stroke-width: 0;
+	fill : black;
+	font-size: 14px;
+	text-anchor: middle;
+}
+
+.node.selected {
+	stroke-width: 4px;
+	/*stroke: rgba(0, 0, 0, 1);*/
+	stroke: rgb(212, 212, 212);
+}

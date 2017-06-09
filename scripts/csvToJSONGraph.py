@@ -2,14 +2,18 @@
 
 import json
 
-csv = open("./Lekagul Sensor Data.csv", "r")
+# csv = open("./Lekagul Sensor Data.csv", "r")
+csv = open("./dataset.csv", "r")
 
 FIELD_TIME = 0
 FIELD_ID = 1
 FIELD_TYPE = 2
 FIELD_GATE = 3
+FIELD_GATE_POSX = 4
+FIELD_GATE_POSY = 5
 
 gateNames = []
+gatePositions = []
 trajectories = {} #diccionario con { id : [ gate, gate, gate ], id2 : [...], ... ]
 
 firstLine = True
@@ -20,9 +24,15 @@ for line in csv:
 
     arrLine = line.split(",")
     gateName = arrLine[FIELD_GATE].rstrip()
+    gatePosX = arrLine[FIELD_GATE_POSX].rstrip()
+    gatePosY = arrLine[FIELD_GATE_POSY].rstrip()
 
     if not gateName in gateNames:
         gateNames.append( gateName )
+        gatePositions.append({
+            "x" : gatePosX,
+            "y" : gatePosY
+        })
 
     carID = arrLine[FIELD_ID]
 
@@ -42,7 +52,9 @@ jsonFinal = {
 for gateID, gate in enumerate(gateNames):
     jsonFinal["nodes"].append({
         "node" : gateID,
-        "name" : gate
+        "name" : gate,
+        "x" : gatePositions[gateID]["x"],
+        "y" : gatePositions[gateID]["y"]
     })
 
 linksSimple = {}
@@ -73,19 +85,17 @@ for key, car in trajectories.items():
         linksSimple[sourceTarget] += 1
         byEntrance[ entrance ][ sourceTarget ] += 1
 
-        # descomentar esto para grafo completo
-        #
-        # jsonFinal["links"].append({
-        #     "source" : sourceID,
-        #     "target" : targetID,
-        #     "type" : info["type"],
-        #     "time" : info["time"],
-        #     "value" : 1
-        # })
+        jsonFinal["links"].append({
+            "source" : sourceID,
+            "target" : targetID,
+            "type" : info["type"],
+            "time" : info["time"],
+            "value" : 1
+        })
 
-# with open ("./sensorData.graph.json", "w") as j:
-#     json.dump( jsonFinal , j )
-#     print("hice sensorData.graph.json")
+with open ("./sensorData.graph.json", "w") as j:
+    json.dump( jsonFinal , j )
+    print("hice sensorData.graph.json")
 
 jsonSimple = {
     "nodes" : jsonFinal["nodes"],

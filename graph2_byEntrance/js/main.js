@@ -75,13 +75,13 @@ function init() {
         physics: {
             enabled: false
         },
-        layout : {
-            hierarchical : {
-                enabled : true,
-                direction : "LR",
-                sortMethod : "hubsize"
-            }
-        }
+        // layout : {
+        //     hierarchical : {
+        //         enabled : true,
+        //         direction : "LR",
+        //         sortMethod : "hubsize"
+        //     }
+        // }
 
     };
     network = new vis.Network(container, data, options);
@@ -106,6 +106,8 @@ function filterData() {
         filteredData.nodes.push( {
             "id" : node.node,
             "label" : node.name,
+            "x" : node.x * 10,
+            "y" : node.y * 10,
             "value" : value,
             // "color" : color
         } );

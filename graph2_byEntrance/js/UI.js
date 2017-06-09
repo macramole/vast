@@ -16,11 +16,15 @@ var UI = {
 
     initGates : function() {
         data.nodes.sort(function(a,b) {
-            return a.name > b.name;
+            if ( a.name < b.name ) {
+                return -1;
+            }
+            return 1;
         });
 
         for ( node of data.nodes ) {
             nodeName = node.name;
+            console.log(node.node);
 
             $li = document.createElement("li");
             $li.innerHTML = nodeName;

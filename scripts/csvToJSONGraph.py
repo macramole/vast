@@ -86,16 +86,27 @@ for key, car in trajectories.items():
         byEntrance[ entrance ][ sourceTarget ] += 1
 
         jsonFinal["links"].append({
+            "carID" : key,
             "source" : sourceID,
             "target" : targetID,
             "type" : info["type"],
-            "time" : info["time"],
+            "sourceTime" : info["time"],
+            "targetTime" : prevInfo["time"],
             "value" : 1
         })
 
 with open ("./sensorData.graph.json", "w") as j:
-    json.dump( jsonFinal , j )
+    json.dump( jsonFinal["links"] , j )
     print("hice sensorData.graph.json")
+
+#bajada de dataset para filtrar
+# import pandas as pd
+#
+# with open ("./soloLinks.json", "w") as j:
+#     json.dump( jsonFinal["links"] , j )
+#
+# pdData = pd.read_json( path_or_buf = "./soloLinks.json", orient = "records" )
+# pdData.to_csv("sensorData.links.csv", index = False)
 
 jsonSimple = {
     "nodes" : jsonFinal["nodes"],

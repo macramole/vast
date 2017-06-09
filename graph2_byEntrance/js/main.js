@@ -86,7 +86,7 @@ function filterData() {
             "id" : node.node,
             "label" : node.name,
             "x" : node.x * 10,
-            "y" : node.y * 10,
+            "y" : ( 200 - node.y ) * 10,
             "value" : value,
         } );
     }

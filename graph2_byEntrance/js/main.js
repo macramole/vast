@@ -20,31 +20,6 @@ function init() {
     nodes = new vis.DataSet( filteredData.nodes );
     edges = new vis.DataSet( filteredData.links );
 
-    //absoluto
-    // var maxLinkValue = 0;
-    // var sumValue = 0;
-    //
-    // for ( link of data.links ) {
-    //     if ( link.value > maxLinkValue ) {
-    //         maxLinkValue = link.value;
-    //     }
-    //     sumValue += link.value;
-    // }
-
-    // var jLinks = [];
-    // for ( link of filteredData.links ) {
-    //     jLinks.push({
-    //
-    //         //    chosen : {
-    //         //    edge : function(values, id, selected, hovering) {
-    //         //        console.log("hola");
-    //         //        values.color =  "red";
-    //         //    }
-    //         //    }
-    //     });
-    // }
-
-
     var container = document.getElementById('mynetwork');
     container.style.height = window.innerHeight + "px";
 
@@ -66,9 +41,6 @@ function init() {
                 "type": "curvedCW",
                 "forceDirection": "none"
             },
-            // "shadow" : {
-            //     enabled : true
-            // },
             chosen : {
                 edge : function(values, id, selected, hovering) {
                     if ( edges.get(id).from == network.getSelectedNodes()[0] ) {
@@ -104,14 +76,11 @@ function filterData() {
 
     for ( nodeID in data.nodes ) {
         var node = data.nodes[nodeID];
-
         var value = 1;
-        // var color = "#97c2fc";
 
         if ( node.name == entranceName ) {
             value = 2;
             entranceId = node.node;
-            // color = "#97fcfb";
         }
         filteredData.nodes.push( {
             "id" : node.node,
@@ -119,7 +88,6 @@ function filterData() {
             "x" : node.x * 10,
             "y" : node.y * 10,
             "value" : value,
-            // "color" : color
         } );
     }
 

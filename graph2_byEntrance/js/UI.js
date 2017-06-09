@@ -24,7 +24,6 @@ var UI = {
 
         for ( node of data.nodes ) {
             nodeName = node.name;
-            console.log(node.node);
 
             $li = document.createElement("li");
             $li.innerHTML = nodeName;

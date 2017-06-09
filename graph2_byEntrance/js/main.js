@@ -66,9 +66,16 @@ function init() {
                 "type": "curvedCW",
                 "forceDirection": "none"
             },
+            // "shadow" : {
+            //     enabled : true
+            // },
             chosen : {
                 edge : function(values, id, selected, hovering) {
-                    values.color = "red";
+                    if ( edges.get(id).from == network.getSelectedNodes()[0] ) {
+                        values.color = "red";
+                    } else {
+                        values.color = "green";
+                    }
                 }
             }
         },
@@ -93,6 +100,8 @@ function filterData() {
         "links" : []
     }
 
+    var entranceId;
+
     for ( nodeID in data.nodes ) {
         var node = data.nodes[nodeID];
 
@@ -101,6 +110,7 @@ function filterData() {
 
         if ( node.name == entranceName ) {
             value = 2;
+            entranceId = node.node;
             // color = "#97fcfb";
         }
         filteredData.nodes.push( {
@@ -113,25 +123,26 @@ function filterData() {
         } );
     }
 
-    var maxLinkValue = 0;
+    // La suma de todos los que empiezan por entrance 1
     var sumValue = 0;
-
     for ( link of data.entrances[entranceName] ) {
-        if ( link.value > maxLinkValue ) {
-            maxLinkValue = link.value;
+        if ( link.source == entranceId ) {
+            sumValue += link.value;
         }
-        sumValue += link.value;
     }
 
     for ( linkID in data.entrances[entranceName] ) {
         var link = data.entrances[entranceName][linkID];
+        var title = ( (link.value / sumValue) * 100 + "" ).substr(0,4) + "%";
+        title += " / " + link.value;
 
         filteredData.links.push({
             from : link.source,
             to : link.target,
             arrows : 'to',
-            width : map(link.value, 1, maxLinkValue, 1, 10),
-            title : ( (link.value / sumValue) * 100 + "" ).substr(0,4) + "%",
+            width : map(link.value, 1, sumValue, 1, 20),
+            // title : ( (link.value / sumValue) * 100 + "" ).substr(0,4) + "%",
+            title : title
         });
     }
 

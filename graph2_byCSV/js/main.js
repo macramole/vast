@@ -77,11 +77,13 @@ function filterData( name ) {
     }
 
     var maxLinkValue = 0;
-    for ( link of filteredData.links ) {
+    for ( link of Data.csvLinks[name] ) {
         if ( link.value > maxLinkValue ) {
             maxLinkValue = link.value;
         }
     }
+
+    console.log(maxLinkValue);
 
     for ( linkID in Data.csvLinks[name] ) {
         var link = Data.csvLinks[name][linkID];

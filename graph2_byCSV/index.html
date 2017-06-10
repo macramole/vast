@@ -9,13 +9,15 @@
     </head>
     <body ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
         <div id="UI">
-            <h3>Entrada:</h3>
-            <select id="selEntrances"></select>
-
-            <h3>Filtrar gates:</h3>
-            <ul id="ulGates">
-
-            </ul>
+            <div id="csvSelector" class="hide">
+                <h3>CSVs:</h3>
+                <select multiple id="selCSV">
+                </select>
+                <button id="btnClear">Borrar</button>
+            </div>
+            <div id="instrucciones">
+                Arrastrá los CSV para visualizarlos.
+            </div>
         </div>
         <div id="mynetwork"></div>
 

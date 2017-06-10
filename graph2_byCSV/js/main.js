@@ -1,11 +1,9 @@
 var filteredData = data;
 var nodes, edges, network;
 
-var entranceName = "entrance0";
-
 UI.init();
-filterData();
-init();
+// filterData();
+// init();
 
 function init() {
     nodes = new vis.DataSet( filteredData.nodes );
@@ -57,7 +55,7 @@ function init() {
     network = new vis.Network(container, data, options);
 }
 
-function filterData() {
+function filterData( name ) {
     filteredData = {
         "nodes" : [],
         "links" : []
@@ -69,10 +67,6 @@ function filterData() {
         var node = data.nodes[nodeID];
         var value = 1;
 
-        if ( node.name == entranceName ) {
-            value = 2;
-            entranceId = node.node;
-        }
         filteredData.nodes.push( {
             "id" : node.node,
             "label" : node.name,
@@ -82,49 +76,24 @@ function filterData() {
         } );
     }
 
-    // La suma de todos los que empiezan por entrance 1
-    var sumValue = 0;
-    for ( link of data.entrances[entranceName] ) {
-        if ( link.source == entranceId ) {
-            sumValue += link.value;
+    var maxLinkValue = 0;
+    for ( link of filteredData.links ) {
+        if ( link.value > maxLinkValue ) {
+            maxLinkValue = link.value;
         }
     }
 
-    for ( linkID in data.entrances[entranceName] ) {
-        var link = data.entrances[entranceName][linkID];
-        var title = ( (link.value / sumValue) * 100 + "" ).substr(0,4) + "%";
-        title += " / " + link.value;
+    for ( linkID in Data.csvLinks[name] ) {
+        var link = Data.csvLinks[name][linkID];
+        var title = link.value;
 
         filteredData.links.push({
             from : link.source,
             to : link.target,
             arrows : 'to',
-            width : map(link.value, 1, sumValue, 1, 20),
-            // title : ( (link.value / sumValue) * 100 + "" ).substr(0,4) + "%",
+            width : map(link.value, 1, maxLinkValue, 1, 20),
             title : title
         });
-    }
-
-    for ( var node of filteredData.nodes ) {
-        var hasLink = false;
-
-        for ( var link of filteredData.links ) {
-            if ( link.from == node.id || link.to == node.id ) {
-                hasLink = true;
-                break;
-            }
-        }
-
-        $li = document.querySelector("#ulGates li[data-id='" + node.id + "']");
-        $li.classList.add("selected");
-        $li.classList.remove("disabled");
-
-        if ( !hasLink ) {
-            node.hidden = true;
-
-            $li.classList.remove("selected");
-            $li.classList.add("disabled");
-        }
     }
 }
 
@@ -132,15 +101,22 @@ function drop_handler(e) {
     e.preventDefault();
 
     var files = e.dataTransfer.files;
-    var reader = new FileReader();
 
-    reader.onload = (function(theFile) {
-        return function(e) {
-            Data.parseCSV(e.target.result);
-        };
-      })(files[0]);
+    for ( f of files ) {
+        var reader = new FileReader();
 
-    reader.readAsText( files[0] );
+        reader.onload = (function(theFile) {
+            return function(e) {
+                Data.parseCSV(e.target.result, theFile.name);
+                UI.addCSV(theFile.name);
+                // filterData();
+                // init();
+            };
+        })(f);
+
+        reader.readAsText( f );
+    }
+
 }
 function dragover_handler(e) {
     e.preventDefault();

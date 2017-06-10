@@ -16,11 +16,23 @@ h3 {
   border: 1px solid lightgray;
 }
 
+
+
 #UI {
     /*float : left;*/
     position: absolute;
     z-index: 100;
     padding-left: 0.5em;
+}
+
+#UI #selCSV {
+    width: 100%;
+}
+.hide {
+    display: none;
+}
+#instrucciones {
+    margin-top: 1em;
 }
 
 #UI #ulGates {

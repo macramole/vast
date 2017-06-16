@@ -72,8 +72,10 @@ for key, car in trajectories.items():
         info = car[i]
         prevInfo = car[i-1]
 
-        sourceID = int(gateNames.index( prevInfo["gate"] ))
-        targetID = int(gateNames.index( info["gate"] ))
+        # sourceID = int(gateNames.index( prevInfo["gate"] ))
+        # targetID = int(gateNames.index( info["gate"] ))
+        sourceID = prevInfo["gate"]
+        targetID = info["gate"]
 
         sourceTarget = str(sourceID) + "-" + str(targetID)
 
@@ -107,6 +109,7 @@ with open ("./soloLinks.json", "w") as j:
 
 pdData = pd.read_json( path_or_buf = "./soloLinks.json", orient = "records" )
 pdData.to_csv("sensorData.links.csv", index = False)
+print("sensorData.links.csv")
 
 jsonSimple = {
     "nodes" : jsonFinal["nodes"],
@@ -115,8 +118,8 @@ jsonSimple = {
 
 for sourceTarget, value in linksSimple.items():
     arrSourceTarget = sourceTarget.split("-")
-    source = int(arrSourceTarget[0])
-    target = int(arrSourceTarget[1])
+    source = arrSourceTarget[0]
+    target = arrSourceTarget[1]
     jsonSimple["links"].append({
         "source" : source,
         "target" : target,
@@ -139,8 +142,8 @@ for entranceName, sourceTargets in byEntrance.items():
 
     for sourceTarget, value in sourceTargets.items():
         arrSourceTarget = sourceTarget.split("-")
-        source = int(arrSourceTarget[0])
-        target = int(arrSourceTarget[1])
+        source = arrSourceTarget[0]
+        target = arrSourceTarget[1]
         links.append({
             "source" : source,
             "target" : target,

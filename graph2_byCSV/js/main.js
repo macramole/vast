@@ -68,7 +68,7 @@ function filterData( name ) {
         var value = 1;
 
         filteredData.nodes.push( {
-            "id" : node.node,
+            "id" : node.name,
             "label" : node.name,
             "x" : node.x * 10,
             "y" : ( 200 - node.y ) * 10,

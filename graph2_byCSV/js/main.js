@@ -1,6 +1,12 @@
 var filteredData = data;
 var nodes, edges, network;
 
+var edgesColor = ["", "#0000FF", "#FF0000", "#00FF00" ];
+// var edgesType = ["", "curvedCW", "curvedCCW"];
+var edgesRoundness = ["", 0.5, 1];
+var edgesSelfReference = ["", 20, 25]; //para los loops
+var EDGES_MAX_WIDTH = 20;
+
 UI.init();
 // filterData();
 // init();
@@ -32,11 +38,11 @@ function init() {
             },
             chosen : {
                 edge : function(values, id, selected, hovering) {
-                    if ( edges.get(id).from == network.getSelectedNodes()[0] ) {
-                        values.color = "red";
-                    } else {
-                        values.color = "green";
-                    }
+                    // if ( edges.get(id).from == network.getSelectedNodes()[0] ) {
+                    //     values.color = "red";
+                    // } else {
+                    //     values.color = "green";
+                    // }
                 }
             }
         },
@@ -87,13 +93,28 @@ function filterData( name ) {
 
     for ( linkID in Data.csvLinks[name] ) {
         var link = Data.csvLinks[name][linkID];
+
         var title = link.value;
+        var color = edgesColor[link.color];
+
+        if ( link.label ) {
+            title = link.label + " (" + link.value + ")";
+        }
+
+        // if ( link.color ) {
+        //     color = ;
+        // }
 
         filteredData.links.push({
             from : link.source,
             to : link.target,
+            color : color,
+            smooth : {
+                roundness : edgesRoundness[link.color]
+            },
+            selfReferenceSize : edgesSelfReference[link.color], 
             arrows : 'to',
-            width : map(link.value, 1, maxLinkValue, 1, 20),
+            width : map(link.value, 1, maxLinkValue, 1, EDGES_MAX_WIDTH),
             title : title
         });
     }

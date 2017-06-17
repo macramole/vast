@@ -1,0 +1,37 @@
+"source","target","color","label","value"
+"camping0","camping0",1,"0.1067 mins",15
+"camping0","entrance1",1,"16.45 mins",1
+"camping0","general-gate7",1,"19.22 mins",14
+"camping2","camping2",1,"0.09804 mins",17
+"camping2","entrance1",1,"5.639 mins",3
+"camping2","general-gate7",1,"17.8 mins",14
+"camping3","camping3",1,"0.1068 mins",59
+"camping3","entrance1",1,"11.15 mins",10
+"camping3","general-gate7",1,"13.76 mins",49
+"camping4","camping4",1,"[ 0.05,12.32) mins",25
+"camping4","camping4",2,"[12.32,24.58] mins",1
+"camping4","entrance1",1,"7.25 mins",4
+"camping4","general-gate7",1,"9.514 mins",22
+"camping5","camping5",1,"0.1036 mins",23
+"camping5","general-gate7",1,"10.24 mins",23
+"camping6","camping6",1,"0.1167 mins",7
+"camping6","entrance4",1,"2.105 mins",7
+"entrance1","camping0",1,"16.6 mins",17
+"entrance1","camping2",1,"5.793 mins",18
+"entrance1","camping3",1,"11.18 mins",59
+"entrance1","camping4",1,"7.076 mins",27
+"entrance1","general-gate7",1,"12.89 mins",1143
+"general-gate1","ranger-stop2",1,"2.443 mins",347
+"general-gate2","entrance2",1,"18.69 mins",192
+"general-gate2","general-gate5",1,"10.73 mins",155
+"general-gate4","entrance0",1,"12.81 mins",428
+"general-gate4","general-gate1",1,"10.42 mins",347
+"general-gate5","camping6",1,"9.362 mins",7
+"general-gate5","entrance4",1,"9.34 mins",148
+"general-gate7","camping5",1,"10.31 mins",23
+"general-gate7","entrance1",1,"12.04 mins",2
+"general-gate7","entrance3",1,"15.09 mins",465
+"general-gate7","general-gate4",1,"6.9 mins",775
+"general-gate7","general-gate7",1,"1.683 mins",1
+"ranger-stop0","general-gate2",1,"2.992 mins",347
+"ranger-stop2","ranger-stop0",1,"2.836 mins",347

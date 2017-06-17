@@ -4,6 +4,8 @@ var Data = {
     FIELD_SOURCE : "source",
     FIELD_TARGET : "target",
     FIELD_VALUE : "value",
+    FIELD_COLOR : "color",
+    FIELD_LABEL : "label",
 
     clear : function() {
         Data.csvLinks = {};
@@ -16,6 +18,8 @@ var Data = {
         var fieldSource = header.indexOf(Data.FIELD_SOURCE);
         var fieldTarget = header.indexOf(Data.FIELD_TARGET);
         var fieldValue = header.indexOf(Data.FIELD_VALUE);
+        var fieldColor = header.indexOf(Data.FIELD_COLOR);
+        var fieldLabel = header.indexOf(Data.FIELD_LABEL);
 
         Data.csvLinks[name] = [];
 
@@ -23,7 +27,9 @@ var Data = {
             Data.csvLinks[name].push({
                 source : arrData[i][fieldSource],
                 target : arrData[i][fieldTarget],
-                value : arrData[i][fieldValue]
+                value : arrData[i][fieldValue],
+                color : arrData[i][fieldColor],
+                label : arrData[i][fieldLabel]
             });
         }
     },

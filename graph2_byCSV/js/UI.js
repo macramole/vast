@@ -22,7 +22,7 @@ var UI = {
             filterData(csvName);
             init();
         });
-        $selCSV.style.height = window.innerHeight * 0.8 + "px";
+        $selCSV.style.height = window.innerHeight * 0.6 + "px";
     },
 
     addCSV : function(name) {
@@ -89,6 +89,31 @@ var UI = {
             $selCSV = document.querySelector("#selCSV");
             $selCSV.innerHTML = "";
             network.destroy();
+        });
+
+        $filtrarTramos = document.querySelector("#filtrarEdges");
+        $filtrarTramos.max = EDGES_MAX_WIDTH;
+        $filtrarTramos.value = 0;
+        $filtrarTramos.addEventListener("input", function() {
+            var value = this.value;
+
+            var filteredEdges = edges.get({
+                filter: function (item) {
+                    return item.width < value;
+                }
+            });
+
+            var allEdges = edges.get();
+
+            for ( edge of allEdges ) {
+                edge.hidden = false;
+            }
+            edges.update(allEdges);
+
+            for ( edge of filteredEdges ) {
+                edge.hidden = true;
+            }
+            edges.update(filteredEdges);
         });
     },
 

@@ -29,3 +29,7 @@ write.csv( as.data.frame(df[ df$carID == "20155705025759-63", ] %>%
   summarise(
     value = n()
   )), file = "seQuedoUnAnioAgregado.csv" )
+
+
+
+df = read.csv("filtrosVentana/entrance2--0-3600.csv")

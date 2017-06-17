@@ -22,6 +22,7 @@ var UI = {
             filterData(csvName);
             init();
         });
+        $selCSV.style.height = window.innerHeight * 0.8 + "px";
     },
 
     addCSV : function(name) {
